@@ -31,7 +31,7 @@ Custom property | Description | Default
         padding-top: 10px;
         padding-bottom: 10px;
         padding-left: 20px;
-        border-bottom: 1px solid #f1f5f7;
+        border: 1px solid #f1f5f7;
         height: 50px;
         @apply(--mdb-recommended-concepts-title);
       }
@@ -41,8 +41,7 @@ Custom property | Description | Default
       }
 
        :host .recommendation-list {
-        background-color: #fcfdff;
-        border-top: 1px solid #f1f5f7;
+        background-color: #fcfdff;        
         border-left: 1px solid #f1f5f7;
         border-right: 1px solid #f1f5f7;
       }
@@ -70,9 +69,11 @@ Custom property | Description | Default
         margin-top: var(--standard-padding, 20px);
       }
     </style>
+
+
+    <mdb-title help-text="Recommended Concepts" level="2">Recommended Concepts for {{column}} </mdb-title>
     <template is="dom-if" if="[[recommendations.length]]">
       <div class="recommendation-list">
-        <mdb-title help-text="Recommended Concepts" level="2">Recommended Concepts for {{column}}</mdb-title>
         <template is="dom-repeat" items="[[recommendations]]">
           <mdb-concept-recommendation property="[[item.property]]" recommendation-factor="{{item.recommendationFactor}}" recommended="{{item.recommended}}"></mdb-concept-recommendation>
         </template>
@@ -80,11 +81,13 @@ Custom property | Description | Default
     </template>
     <template is="dom-if" if="[[!recommendations.length]]">
       <div class="no-recommended-concepts">
-        <p>Sorry, we couldn't find any recommended concepts for {{column}}. If you're looking for something particular, please try searching
-          below.
+        <p>Sorry, we couldn't find any recommended concepts for {{column}}. If you're looking for something particular, please
+          try searching below.
         </p>
       </div>
     </template>
+
+
     <div id="search-box">
       <mdb-search-box placeholder="Search for more concepts" filter="{{searchQuery}}" source="{{recommendations}}" search-results="{{_searchResults}}"
         search-path="property"></mdb-search-box>
