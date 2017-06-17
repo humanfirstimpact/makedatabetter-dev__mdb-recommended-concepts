@@ -72,7 +72,7 @@ Custom property | Description | Default
     </style>
     <template is="dom-if" if="[[recommendations.length]]">
       <div class="recommendation-list">
-        <mdb-title help-text="Recommended Concepts" level="2">Recommended Concepts</mdb-title>
+        <mdb-title help-text="Recommended Concepts" level="2">Recommended Concepts for {{column}}</mdb-title>
         <template is="dom-repeat" items="[[recommendations]]">
           <mdb-concept-recommendation property="[[item.property]]" recommendation-factor="{{item.recommendationFactor}}" recommended="{{item.recommended}}"></mdb-concept-recommendation>
         </template>
@@ -80,7 +80,7 @@ Custom property | Description | Default
     </template>
     <template is="dom-if" if="[[!recommendations.length]]">
       <div class="no-recommended-concepts">
-        <p>Sorry, we couldn't find any recommended concepts. If you're looking for something particular, please try searching
+        <p>Sorry, we couldn't find any recommended concepts for {{column}}. If you're looking for something particular, please try searching
           below.
         </p>
       </div>
@@ -111,6 +111,11 @@ Custom property | Description | Default
       is: 'mdb-recommended-concepts',
 
       properties: {
+        column: {
+          type: String,
+          value: ''
+        },
+
         recommendations: {
           type: Array,
           value: [],
