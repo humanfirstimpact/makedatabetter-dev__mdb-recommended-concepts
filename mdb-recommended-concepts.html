@@ -16,6 +16,7 @@ The following custom properties and mixins are available for styling:
 Custom property | Description | Default
 ----------------|-------------|----------
 `--mdb-recommended-concepts-title` | Mixin applied to recommended concepts title | `{}`
+`--mdb-recommeded-concepts-list-container` | Mixin applied to recommended concepts list container | `{}`
 
 @demo demo/index.html 
 -->
@@ -44,6 +45,7 @@ Custom property | Description | Default
 
        :host .recommendation-list {
         background-color: #fcfdff;
+        @apply(--mdb-recommeded-concepts-list-container);
       }
 
        :host #search-box {
