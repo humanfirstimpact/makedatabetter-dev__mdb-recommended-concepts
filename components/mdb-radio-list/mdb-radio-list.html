@@ -30,10 +30,9 @@ Custom property | Description | Default
       }
 
        :host ::content paper-radio-button {
-        display: inline;
         border: 1px solid;
-        border-color: var(--mdb-border-color, #000);
-        color: var(--mdb-disabled-text-dark, #000);
+        border-color: var(--mdb-radio-button-border-color, --mdb-border-color);
+        color: var(--mdb-radio-button-font-color, --mdb-disabled-text-dark);
         @apply(--mdb-radio-list-button);
       }
 
@@ -43,9 +42,10 @@ Custom property | Description | Default
       }
 
        :host ::content paper-radio-button[aria-checked="true"] {
-        border-color: var(--mdb-accent-color-highlight, #5da9dd);
-        background-color: var(--mdb-accent-color-highlight, #5da9dd);
-        color: var(--mdb-primary-text-light, #fff);
+        border-color: var(--mdb-radio-button-checked-border-color, --mdb-accent-color-highlight);
+        background-color: var(--mdb-radio-button-checked-background-color, --mdb-accent-color-highlight);
+        color: var(--mdb-radio-button-checked-font-color, --mdb-primary-text-light);
+        @apply(--mdb-radio-list-button-checked)
       }
 
        :host ::content paper-radio-button[aria-checked="true"]+paper-radio-button {
@@ -102,7 +102,7 @@ Custom property | Description | Default
           '--paper-radio-button-unchecked-color': 'transparent',
           '--paper-radio-button-checked-ink-color': 'transparent',
           '--paper-radio-button-unchecked-ink-color': 'transparent',
-          '--paper-radio-button-label-color': this.getComputedStyleValue('--mdb-disabled-text-dark') || '#bbb',
+          '--paper-radio-button-label-color': this.getComputedStyleValue('--mdb-radio-list-font-color') || '#bbb',
           '--paper-radio-button-size': '0',
           '--paper-radio-button-label-spacing': '0'
         };
@@ -114,7 +114,7 @@ Custom property | Description | Default
               e.noink = true;
 
               if (this.checked) {
-                this.customStyle['--paper-radio-button-label-color'] = this.getComputedStyleValue('--mdb-primary-text-light') || '#fff'
+                this.customStyle['--paper-radio-button-label-color'] = this.getComputedStyleValue('--mdb-radio-button-checked-font-color') || '#fff'
               } else {
                 this.customStyle['--paper-radio-button-label-color'] = customStyles['--paper-radio-button-label-color'];
               }
