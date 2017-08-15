@@ -61,12 +61,12 @@
         </style>
         <div id="recommendationContainer">
             <span id="property" title="[[property]]">[[property]]</span>
-            <mdb-radio-list size="small" selected="{{recommended}}">
-                <paper-radio-button name="yes">YES</paper-radio-button>
-                <paper-radio-button name="no">NO</paper-radio-button>
-                <paper-radio-button name="maybe">MAYBE</paper-radio-button>
+            <mdb-radio-list size="small" selected="{{verified}}">
+                <paper-radio-button name="Y">YES</paper-radio-button>
+                <paper-radio-button name="N">NO</paper-radio-button>
+                <paper-radio-button name="F">MAYBE</paper-radio-button>
             </mdb-radio-list>
-            <span id="recommendationFactor">{{recommendationFactor}}%</span>
+            <span id="recommendationFactor">{{relevance}}%</span>
         </div>
     </template>
 
@@ -76,11 +76,6 @@
             is: 'mdb-concept-recommendation',
 
             properties: {
-                name: {
-                    type: String,
-                    value: 'mdb-concept-recommendation',
-                },
-
                 property: {
                     type: String
                 },
@@ -89,48 +84,49 @@
                     type: String
                 },
 
-                _initialRecommendationFactor: {
+                _initialRelevance: {
                     type: Number,
                     value: 0,
-                    readonly: true
+                    readOnly: true
                 },
 
-                recommendationFactor: {
+                relevance: {
                     type: Number,
-                    value: 0
+                    value: 0,
+                    observer: '_relevanceChanged'
                 },
 
-                recommended: {
+                verified: {
                     type: String,
-                    value: 'maybe',
+                    value: 'F',
                     notify: true,
                     reflectToAttribute: true,
                     observer: '_recommendedChanged'
                 }
             },
 
-            attached: function () {
-                this._initialRecommendationFactor = this.recommendationFactor;
+            _relevanceChanged: function (updated, old) {
+                this._set_initialRelevance(old);
             },
 
             _recommendedChanged: function () {
                 switch (this.recommended) {
-                    case 'yes':
-                        this.recommendationFactor = 100;
+                    case 'Y':
+                        this.relevance = 100;
                         break;
-                    case 'no':
-                        this.recommendationFactor = 0;
+                    case 'N':
+                        this.relevance = 0;
                         break;
-                    case 'maybe':
-                        this.recommendationFactor = this._initialRecommendationFactor;
+                    case 'F':
+                        this.relevance = this._initialRelevance;
                         break;
                 }
 
                 this.fire('recommendation-changed', {
                     property: this.property,
                     column: this.column,
-                    recommended: this.recommended,
-                    recommendationFactor: this.recommendationFactor
+                    verified: this.verified,
+                    relevance: this.relevance
                 });
             }
 

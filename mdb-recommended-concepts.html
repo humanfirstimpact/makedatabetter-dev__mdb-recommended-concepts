@@ -85,8 +85,7 @@ Custom property | Description | Default
     <template is="dom-if" if="[[recommendations.length]]">
       <div class="recommendation-list">
         <template is="dom-repeat" items="[[recommendations]]">
-          <mdb-concept-recommendation property="[[item.property]]" column="[[column]]" recommendation-factor="{{item.recommendationFactor}}"
-            recommended="{{item.recommended}}"></mdb-concept-recommendation>
+          <mdb-concept-recommendation property="[[item.label]]" column="[[column]]" relevance="{{item.relevance}}" verified="{{item.verified}}"></mdb-concept-recommendation>
         </template>
       </div>
     </template>
@@ -101,13 +100,12 @@ Custom property | Description | Default
 
     <div id="search-box">
       <mdb-search-box placeholder="Search for more concepts" filter="{{searchQuery}}" source="{{searchSource}}" search-results="{{_searchResults}}"
-        search-path="property"></mdb-search-box>
+        search-path="label"></mdb-search-box>
       <template is="dom-if" if="{{searchQuery}}">
         <template is="dom-if" if="[[_searchResults.length]]">
           <div class="recommendation-list">
             <template is="dom-repeat" items="[[_searchResults]]">
-              <mdb-concept-recommendation property="[[item.property]]" column="[[column]]" recommendation-factor="{{item.recommendationFactor}}"
-                recommended="{{item.recommended}}"></mdb-concept-recommendation>
+              <mdb-concept-recommendation property="[[item.label]]" column="[[column]]" relevance="{{item.relevance}}" verified="{{item.verified}}"></mdb-concept-recommendation>
             </template>
           </div>
         </template>
@@ -168,8 +166,8 @@ Custom property | Description | Default
           Array.prototype.forEach.call(listItems, function (e) {
             var recommendation = recommendations.find(function (i) { return i.property === e.property; });
             if (recommendation) {
-              e.recommendationFactor = recommendation.recommendationFactor;
-              e.recommended = recommendation.recommended;
+              e.relevance = recommendation.relevance;
+              e.verified = recommendation.verified;
             }
           });
         }
