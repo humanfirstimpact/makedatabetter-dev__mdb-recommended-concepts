@@ -60,13 +60,13 @@
             }
         </style>
         <div id="recommendationContainer">
-            <span id="property" title="[[property]]">[[property]]</span>
-            <mdb-radio-list size="small" selected="{{verified}}">
+            <span id="property" title="[[concept.label]]">[[concept.label]]</span>
+            <mdb-radio-list size="small" selected="{{concept.verified}}">
                 <paper-radio-button name="Y">YES</paper-radio-button>
                 <paper-radio-button name="N">NO</paper-radio-button>
                 <paper-radio-button name="F">MAYBE</paper-radio-button>
             </mdb-radio-list>
-            <span id="recommendationFactor">{{relevance}}%</span>
+            <span id="recommendationFactor">[[_getConceptRelevance(concept)]]%</span>
         </div>
     </template>
 
@@ -76,60 +76,43 @@
             is: 'mdb-concept-recommendation',
 
             properties: {
-                property: {
-                    type: String
+                concept: {
+                    type: Object,
+                    value: {}
                 },
 
                 column: {
-                    type: String
-                },
-
-                _initialRelevance: {
-                    type: Number,
-                    value: 0,
-                    readOnly: true
-                },
-
-                relevance: {
-                    type: Number,
-                    value: 0,
-                    observer: '_relevanceChanged'
-                },
-
-                verified: {
-                    type: String,
-                    value: 'F',
-                    notify: true,
-                    reflectToAttribute: true,
-                    observer: '_recommendedChanged'
+                    type: Object,
+                    value: {}
                 }
             },
 
-            _relevanceChanged: function (updated, old) {
-                this._set_initialRelevance(old);
-            },
+            observers: [
+                '_conceptUpdated(concept.verified)'
+            ],
 
-            _recommendedChanged: function () {
-                switch (this.recommended) {
+            _conceptUpdated: function () {
+                switch (this.concept.verified) {
                     case 'Y':
-                        this.relevance = 100;
+                        this.concept.relevance = 100;
                         break;
                     case 'N':
-                        this.relevance = 0;
+                        this.concept.relevance = 0;
                         break;
                     case 'F':
-                        this.relevance = this._initialRelevance;
+                        this.concept.relevance = this._initialRelevance;
                         break;
                 }
 
                 this.fire('recommendation-changed', {
-                    property: this.property,
-                    column: this.column,
-                    verified: this.verified,
-                    relevance: this.relevance
+                    concept: this.concept,
+                    column: this.column
                 });
-            }
+            },
 
+            _getConceptRelevance: function () {
+                return this.concept.relevance || 0;
+            },
         });
     </script>
 </dom-module>
