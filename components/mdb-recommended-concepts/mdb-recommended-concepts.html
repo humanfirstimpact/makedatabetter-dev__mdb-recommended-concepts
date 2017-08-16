@@ -81,11 +81,11 @@ Custom property | Description | Default
     </style>
 
 
-    <mdb-title help-text="[[helpText]]" level="2">Recommended Concepts for {{column}} </mdb-title>
+    <mdb-title help-text="[[helpText]]" level="2">Recommended Concepts for {{column.label}} </mdb-title>
     <template is="dom-if" if="[[recommendations.length]]">
       <div class="recommendation-list">
         <template is="dom-repeat" items="[[recommendations]]">
-          <mdb-concept-recommendation property="[[item.label]]" column="[[column]]" relevance="{{item.relevance}}" verified="{{item.verified}}"></mdb-concept-recommendation>
+          <mdb-concept-recommendation concept="[[item]]" column="[[column]]"></mdb-concept-recommendation>
         </template>
       </div>
     </template>
@@ -105,7 +105,7 @@ Custom property | Description | Default
         <template is="dom-if" if="[[_searchResults.length]]">
           <div class="recommendation-list">
             <template is="dom-repeat" items="[[_searchResults]]">
-              <mdb-concept-recommendation property="[[item.label]]" column="[[column]]" relevance="{{item.relevance}}" verified="{{item.verified}}"></mdb-concept-recommendation>
+              <mdb-concept-recommendation concept="[[item]]" column="[[column]]"></mdb-concept-recommendation>
             </template>
           </div>
         </template>
