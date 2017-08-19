@@ -15,12 +15,12 @@
     "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
   },
   "homepage": "https://github.com/makedatabetter-dev/mdb-help-text",
-  "version": "0.0.7",
-  "_release": "0.0.7",
+  "version": "0.0.8",
+  "_release": "0.0.8",
   "_resolution": {
     "type": "version",
-    "tag": "v0.0.7",
-    "commit": "83f504d41db9d2766ec3b7fd9534454f711cfc47"
+    "tag": "v0.0.8",
+    "commit": "f20bc30fd8f61a5f84c115e0ee72bce838820cec"
   },
   "_source": "git://github.com/makedatabetter-dev/mdb-help-text.git",
   "_target": "*",
