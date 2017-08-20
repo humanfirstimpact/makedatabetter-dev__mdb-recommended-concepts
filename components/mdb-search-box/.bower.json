@@ -12,12 +12,12 @@
     "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
   },
   "homepage": "https://github.com/makedatabetter-dev/mdb-search-box",
-  "version": "0.1.1",
-  "_release": "0.1.1",
+  "version": "0.1.2",
+  "_release": "0.1.2",
   "_resolution": {
     "type": "version",
-    "tag": "v0.1.1",
-    "commit": "66efe6e7dbc12eb06c415f26b9b7154ac639c26e"
+    "tag": "v0.1.2",
+    "commit": "5d0e96c53408b6793e2c05773293ff962dad03cd"
   },
   "_source": "git://github.com/makedatabetter-dev/mdb-search-box.git",
   "_target": "*",
