@@ -63,10 +63,10 @@
         </style>
         <div id="recommendationContainer">
             <span id="property" title="[[concept.label]]">[[concept.label]]</span>
-            <mdb-radio-list size="small" selected="{{concept.verified}}">
+            <mdb-radio-list size="small" selected="{{concept.assessment}}">
                 <paper-radio-button name="Y">YES</paper-radio-button>
                 <paper-radio-button name="N">NO</paper-radio-button>
-                <paper-radio-button name="F">MAYBE</paper-radio-button>
+                <paper-radio-button name="M">MAYBE</paper-radio-button>
             </mdb-radio-list>
             <span id="recommendationFactor">[[_getConceptRelevance(concept.*)]]%</span>
         </div>
@@ -90,19 +90,19 @@
             },
 
             observers: [
-                '_conceptUpdated(concept.verified)'
+                '_conceptUpdated(concept.assessment)'
             ],
 
             _conceptUpdated: function () {
                 if (this.concept && this.column) {
-                    switch (this.concept.verified) {
+                    switch (this.concept.assessment) {
                         case 'Y':
                             this.concept.relevance = 100;
                             break;
                         case 'N':
                             this.concept.relevance = 0;
                             break;
-                        case 'F':
+                        case 'M':
                             this.concept.relevance = this._initialRelevance;
                             break;
                     }
