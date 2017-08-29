@@ -94,22 +94,24 @@
             ],
 
             _conceptUpdated: function () {
-                switch (this.concept.verified) {
-                    case 'Y':
-                        this.concept.relevance = 100;
-                        break;
-                    case 'N':
-                        this.concept.relevance = 0;
-                        break;
-                    case 'F':
-                        this.concept.relevance = this._initialRelevance;
-                        break;
-                }
+                if (this.concept && this.column) {
+                    switch (this.concept.verified) {
+                        case 'Y':
+                            this.concept.relevance = 100;
+                            break;
+                        case 'N':
+                            this.concept.relevance = 0;
+                            break;
+                        case 'F':
+                            this.concept.relevance = this._initialRelevance;
+                            break;
+                    }
 
-                this.fire('recommendation-changed', {
-                    concept: this.concept,
-                    column: this.column
-                });
+                    this.fire('recommendation-changed', {
+                        concept: this.concept,
+                        column: this.column
+                    });
+                }
             },
 
             _getConceptRelevance: function () {
