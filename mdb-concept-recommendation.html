@@ -13,52 +13,51 @@
 <dom-module id="mdb-concept-recommendation">
     <template>
         <style>
-            :host {
+             :host {
                 @apply(--layout-horizontal);
                 @apply(--layout-center);
                 padding: 10px var(--standard-padding, 20px);
                 border: 1px solid var(--mdb-border-color, #000);
-                background-color: var(--mdb-primary-color-background, #fcfdff);
-                @apply(--paper-font-common-base);
-            }
+                background-color: var(--mdb-primary-color-background, #dbdbdb);
+                @apply(--mdb-concept-recommendation);
 
-            #property {
+            }
+            :host mdb-radio-list{
+                    background: #fff;
+            }
+            #property{
                 @apply(--layout-flex);
             }
-
-            :host #recommendationContainer #property {
+             :host #recommendationContainer #property {
                 white-space: nowrap;
                 text-overflow: ellipsis;
                 overflow: hidden;
             }
-
-            :host paper-radio-button {
+             :host paper-radio-button {
                 width: 50px;
                 text-align: center;
             }
-
-            :host #recommendationFactor {
-                padding-left: 10px;
+             :host #recommendationFactor {
+                 padding-left: 10px;
             }
-
-            h3 {
+            h3{
                 margin: 0;
                 font-weight: 500;
             }
         </style>
-        <h3 id="property" title="[[concept.label]]">[[concept.label]]</h3>
-        <mdb-radio-list size="small" selected="{{concept.assessment}}">
-            <paper-radio-button name="Y">
-                <iron-icon title="Yes" icon="check"></iron-icon>
-            </paper-radio-button>
-            <paper-radio-button name="N">
-                <iron-icon title="No" icon="clear"></iron-icon>
-            </paper-radio-button>
-            <paper-radio-button name="M">
-                <iron-icon title="Maybe" icon="help-outline"></iron-icon>
-            </paper-radio-button>
-        </mdb-radio-list>
-        <h3 id="recommendationFactor">[[_getConceptRelevance(concept.*)]]%</span>
+            <h3 id="property" title="[[concept.label]]">[[concept.label]]</h3>
+            <mdb-radio-list size="small" selected="{{concept.assessment}}">
+                <paper-radio-button name="Y">
+                    <iron-icon title="Yes" icon="check"></iron-icon>
+                </paper-radio-button>
+                <paper-radio-button name="N">
+                    <iron-icon title="No" icon="clear"></iron-icon>
+                </paper-radio-button>
+                <paper-radio-button name="M">
+                    <iron-icon title="Maybe" icon="help-outline"></iron-icon>
+                </paper-radio-button>
+            </mdb-radio-list>
+            <h3 id="recommendationFactor">[[_getConceptRelevance(concept.*)]]%</span>
     </template>
 
     <script>
