@@ -13,63 +13,52 @@
 <dom-module id="mdb-concept-recommendation">
     <template>
         <style>
-             :host {
-                display: block;
-                padding-left: var(--standard-padding, 20px);
-                padding-top: 10px;
-                padding-bottom: 10px;
+            :host {
+                @apply(--layout-horizontal);
+                @apply(--layout-center);
+                padding: 10px var(--standard-padding, 20px);
                 border: 1px solid var(--mdb-border-color, #000);
                 background-color: var(--mdb-primary-color-background, #fcfdff);
                 @apply(--paper-font-common-base);
             }
 
-             :host #recommendationContainer #property {
-                width: 25%;
+            #property {
+                @apply(--layout-flex);
+            }
+
+            :host #recommendationContainer #property {
                 white-space: nowrap;
                 text-overflow: ellipsis;
                 overflow: hidden;
-                position: absolute;
-                top: 50%;
-                transform: translate(0, -50%);
-                color: var(--mdb-primary-text-dark, #000);
-                @apply(--mdb-recommended-concepts-property-name)
             }
 
-             :host mdb-radio-list {
-                position: relative;
-                left: 30%;
-            }
-
-             :host paper-radio-button {
+            :host paper-radio-button {
                 width: 50px;
                 text-align: center;
             }
 
-             :host #recommendationContainer {
-                display: flex;
-                flex-direction: row;
-                flex-wrap: nowrap;
-                justify-content: space-between;
-                padding: 3px;
-                position: relative;
+            :host #recommendationFactor {
+                padding-left: 10px;
             }
 
-             :host #recommendationFactor {
-                position: absolute;
-                left: 90%;
-                top: 50%;
-                transform: translate(0, -50%);
+            h3 {
+                margin: 0;
+                font-weight: 500;
             }
         </style>
-        <div id="recommendationContainer">
-            <span id="property" title="[[concept.label]]">[[concept.label]]</span>
-            <mdb-radio-list size="small" selected="{{concept.assessment}}">
-                <paper-radio-button name="Y">YES</paper-radio-button>
-                <paper-radio-button name="N">NO</paper-radio-button>
-                <paper-radio-button name="M">MAYBE</paper-radio-button>
-            </mdb-radio-list>
-            <span id="recommendationFactor">[[_getConceptRelevance(concept.*)]]%</span>
-        </div>
+        <h3 id="property" title="[[concept.label]]">[[concept.label]]</h3>
+        <mdb-radio-list size="small" selected="{{concept.assessment}}">
+            <paper-radio-button name="Y">
+                <iron-icon title="Yes" icon="check"></iron-icon>
+            </paper-radio-button>
+            <paper-radio-button name="N">
+                <iron-icon title="No" icon="clear"></iron-icon>
+            </paper-radio-button>
+            <paper-radio-button name="M">
+                <iron-icon title="Maybe" icon="help-outline"></iron-icon>
+            </paper-radio-button>
+        </mdb-radio-list>
+        <h3 id="recommendationFactor">[[_getConceptRelevance(concept.*)]]%</span>
     </template>
 
     <script>
