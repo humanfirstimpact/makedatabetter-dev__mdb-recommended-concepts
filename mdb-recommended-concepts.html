@@ -173,7 +173,7 @@ Custom property | Description | Default
       },
 
       _searchQueryChanged: function () {
-        this.set('_searchResults', JSON.parse(JSON.stringify(this.recommendations)))
+        this.set('_searchResults', JSON.parse(JSON.stringify(this.recommendations || [])))
       }
 
     });
