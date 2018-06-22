@@ -126,7 +126,9 @@
             },
 
             _getConceptRelevance: function () {
-                return this.concept && this.concept.relevance || 0;
+                var relevance = Number(this.concept && this.concept.relevance || 0);
+                
+                return relevance.toFixed(2);
             },
         });
     </script>
