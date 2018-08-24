@@ -98,19 +98,19 @@ Custom property | Description | Default
 
 
     <div id="search-box">
-      <mdb-search-box placeholder="Search for more concepts" filter="{{searchQuery}}" source="{{searchSource}}" search-results="{{_searchResults}}"
+      <mdb-search-box placeholder="Search for more concepts" filter="{{searchQuery}}" source="{{searchResults}}" search-results="{{_searchResults}}"
         search-path="label"></mdb-search-box>
-      <template is="dom-if" if="{{searchQuery}}">
-        <template is="dom-if" if="[[_searchResults.length]]">
+      <template is="dom-if" if="{{_lastSearchQuery}}">
+        <template is="dom-if" if="[[searchResults.length]]">
           <div class="recommendation-list">
-            <template is="dom-repeat" items="[[_searchResults]]">
+            <template is="dom-repeat" items="[[searchResults]]">
               <mdb-concept-recommendation concept="[[item]]" column="[[column]]"></mdb-concept-recommendation>
             </template>
           </div>
         </template>
-        <template is="dom-if" if="[[!_searchResults.length]]">
+        <template is="dom-if" if="[[_showEmptySearchMsg]]">
           <div class="no-recommended-concepts">
-            <p>Sorry, we couldn't find any recommended concepts matching "{{searchQuery}}".</p>
+            <p>Sorry, we couldn't find any recommended concepts matching "{{_lastSearchQuery}}".</p>
           </div>
         </template>
       </template>
@@ -137,12 +137,14 @@ Custom property | Description | Default
         searchQuery: {
           type: String,
           value: '',
+          notify: true,
           observer: '_searchQueryChanged'
         },
 
-        searchSource: {
+        searchResults: {
           type: Object,
-          value: {}
+          value: {},
+          observer: '_searchResultsChanged'
         },
 
         helpText: {
@@ -150,9 +152,9 @@ Custom property | Description | Default
           value: ''
         },
 
-        _searchResults: {
-          type: Array,
-          value: []
+        _showEmptySearchMsg: {
+          type: Boolean,
+          value: false
         }
       },
 
@@ -174,8 +176,14 @@ Custom property | Description | Default
 
       _searchQueryChanged: function () {
         this.set('_searchResults', JSON.parse(JSON.stringify(this.recommendations || [])))
-      }
+      },
 
+      _searchResultsChanged: function(values){
+        this._lastSearchQuery = this.searchQuery;
+        if((this._lastSearchQuery || '').length == 0)
+          this._lastSearchQuery = null;
+        this.set('_showEmptySearchMsg', (values || []).length == 0);
+      }
     });
   </script>
 </dom-module>
