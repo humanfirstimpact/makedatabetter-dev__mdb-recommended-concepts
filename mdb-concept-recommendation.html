@@ -58,7 +58,11 @@
                     <iron-icon title="Maybe" icon="help-outline"></iron-icon>
                 </paper-radio-button>
             </mdb-radio-list>
-            <h3 id="recommendationFactor">[[_getConceptRelevance(concept.*)]]%</span>
+            <h3 id="recommendationFactor">
+                <template is='dom-if' if='[[concept.relevance]]'>
+                    [[_getConceptRelevance(concept.*)]]%
+                </template>
+            </h3>
     </template>
 
     <script>
