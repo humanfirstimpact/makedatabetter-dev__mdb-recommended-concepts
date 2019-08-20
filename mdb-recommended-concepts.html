@@ -99,7 +99,7 @@ Custom property | Description | Default
 
     <div id="search-box">
       <mdb-search-box placeholder="Search for more concepts" filter="{{searchQuery}}" source="{{searchResults}}" search-results="{{_searchResults}}"
-        search-path="label"></mdb-search-box>
+        search-path="label" show-search-controls></mdb-search-box>
       <template is="dom-if" if="{{_lastSearchQuery}}">
         <template is="dom-if" if="[[searchResults.length]]">
           <div class="recommendation-list">
